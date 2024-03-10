@@ -104,7 +104,119 @@ Asi se vería en la BD:
 
 ![App en Odoo](https://github.com/RubenDanielCastelao/SXE-Odoo_Modulo/blob/master/images/db.png)
 
-
-Luego, para que se muestre en la interfaz de Odoo, modificaremos views/views.xml:
+Añadiremos data y un xml para que se muestre en la interfaz de Odoo:
 
 ```xml
+<odoo>
+    <data>
+
+        <record model="usuarios" id="openacademy.usuarios">
+
+            <field name="name">Jay</field>
+            <field name="description">Senior Full Stack Developer</field>
+
+        </record>
+
+    </data>
+</odoo>
+```
+
+Referenciamos este nuevo xml en el manifest:
+
+```python
+    'data': [
+        # 'security/ir.model.access.csv',
+        'data/materiales.xml',
+        'views/views.xml',
+        'views/templates.xml',
+    ]
+```
+
+Luego, como ultimi paso para que se muestre en la interfaz de Odoo, modificaremos views/views.xml:
+
+```xml
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="openacademy.lista_materiales">
+      <field name="name">openacademy list</field>
+      <field name="model">materiales</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+          <field name="precio"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="openacademy.action_window_materiales">
+      <field name="name">materiales</field>
+      <field name="res_model">materiales</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="openacademy.action_server">
+      <field name="name">openacademy server</field>
+      <field name="model_id" ref="model_openacademy_openacademy"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="openacademy" id="openacademy.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Ejemplo" id="openacademy.menu_materiales" parent="openacademy.menu_root"/>
+<!--
+    <menuitem name="Menu 2" id="openacademy.menu_2" parent="openacademy.menu_root"/>
+-->
+    <!-- actions -->
+
+    <menuitem name="Lista de materiales" id="openacademy.listaMateriales" parent="openacademy.menu_materiales"
+              action="openacademy.action_window_materiales"/>
+<!--
+    <menuitem name="Server to list" id="openacademy" parent="openacademy.menu_2"
+              action="openacademy.action_server"/>
+-->
+  </data>
+</odoo>
+```
+
+Luego modificaremos ir.model.access.csv:
+
+```csv
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_openacademy_materiales,openacademy.openacademy,model_materiales,base.group_user,1,1,1,1
+```
+
+Y lo referenciaremos en el views.xml:
+
+```xml
+    'data': [
+        'security/ir.model.access.csv',
+        'data/materiales.xml',
+        'views/views.xml',
+        'views/templates.xml',
+    ]
+```
+
+Esta sería la vista final en Odoo:
+
+![App en Odoo](https://github.com/RubenDanielCastelao/SXE-Odoo_Modulo/blob/master/images/odoo-tabla.png)
