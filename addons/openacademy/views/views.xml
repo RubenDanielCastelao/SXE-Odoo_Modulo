@@ -1,28 +1,28 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="openacademy.list">
+
+    <record model="ir.ui.view" id="openacademy.lista_materiales">
       <field name="name">openacademy list</field>
-      <field name="model">openacademy.openacademy</field>
+      <field name="model">materiales</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="description"/>
+          <field name="precio"/>
         </tree>
       </field>
     </record>
--->
+
 
     <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="openacademy.action_window">
-      <field name="name">openacademy window</field>
-      <field name="res_model">openacademy.openacademy</field>
+
+    <record model="ir.actions.act_window" id="openacademy.action_window_materiales">
+      <field name="name">materiales</field>
+      <field name="res_model">materiales</field>
       <field name="view_mode">tree,form</field>
     </record>
--->
+
 
     <!-- server action to the one above -->
 <!--
@@ -41,18 +41,20 @@
 -->
 
     <!-- Top menu item -->
-<!--
+
     <menuitem name="openacademy" id="openacademy.menu_root"/>
--->
+
     <!-- menu categories -->
+
+    <menuitem name="Ejemplo" id="openacademy.menu_materiales" parent="openacademy.menu_root"/>
 <!--
-    <menuitem name="Menu 1" id="openacademy.menu_1" parent="openacademy.menu_root"/>
     <menuitem name="Menu 2" id="openacademy.menu_2" parent="openacademy.menu_root"/>
 -->
     <!-- actions -->
+
+    <menuitem name="Lista de materiales" id="openacademy.listaMateriales" parent="openacademy.menu_materiales"
+              action="openacademy.action_window_materiales"/>
 <!--
-    <menuitem name="List" id="openacademy.menu_1_list" parent="openacademy.menu_1"
-              action="openacademy.action_window"/>
     <menuitem name="Server to list" id="openacademy" parent="openacademy.menu_2"
               action="openacademy.action_server"/>
 -->
