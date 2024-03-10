@@ -1,0 +1,23 @@
+version: '3.1' # Especifica la versión de Docker Compose que se está utilizando
+
+services: # Define los servicios que se ejecutarán en los contenedores
+  web: # Nombre del servicio
+    image: odoo:16.0 # Imagen de Docker que se utilizará para este servicio
+    volumes:
+      - ./addons:/mnt/extra-addons
+    depends_on: # Define las dependencias de este servicio
+      - mydb # Este servicio depende del servicio 'mydb'
+    ports: # Puertos que se expondrán
+      - "8069:8069" # Mapea el puerto 8069 del contenedor al puerto 8069 de la máquina host
+    environment: # Variables de entorno que se pasarán al contenedor
+      - HOST=mydb # Nombre del host de la base de datos
+      - USER=odoo # Nombre de usuario de la base de datos
+      - PASSWORD=myodoo # Contraseña de la base de datos
+  mydb: # Nombre del servicio
+    image: postgres:15 # Imagen de Docker que se utilizará para este servicio
+    ports: # Puertos que se expondrán
+      - "5432:5432" # Mapea el puerto 5432 del contenedor al puerto 5432 de la máquina host
+    environment: # Variables de entorno que se pasarán al contenedor
+      - POSTGRES_DB=postgres # Nombre de la base de datos
+      - POSTGRES_PASSWORD=myodoo # Contraseña de la base de datos
+      - POSTGRES_USER=odoo # Nombre de usuario de la base de datos
