@@ -32,3 +32,52 @@ Finalmente, hemos reiniciado el contenedor para que Odoo reconozca el nuevo addo
 
 Recuerda reemplazar `/path/to/addons` con la ruta real a tu directorio de addons.
 ```
+
+Despues modificaremos eml manifest.py para que quese muestre la información que queremos en el modulo:
+
+Este sería nuestro ejemplo:
+
+```python
+# -*- coding: utf-8 -*-
+{
+    'name': "openacademy",
+
+    'summary': """
+        Modulo Ruben para SXE""",
+
+    'description': """
+        Un modulo de prueba para SXE
+    """,
+
+    'author': "RubenNG",
+    'website': "https://github.com/RubenDanielCastelao",
+
+    # Categories can be used to filter modules in modules listing
+    # Check https://github.com/odoo/odoo/blob/16.0/odoo/addons/base/data/ir_module_category_data.xml
+    # for the full list
+    'category': 'Modulo de ejemplo',
+    'version': '0.1',
+
+    # any module necessary for this one to work correctly
+    'depends': ['base'],
+
+    # always loaded
+    'data': [
+        # 'security/ir.model.access.csv',
+        'views/views.xml',
+        'views/templates.xml',
+    ],
+    # only loaded in demonstration mode
+    'demo': [
+        'demo/demo.xml',
+    ],
+}
+
+```
+
+Y asi se vería en Odoo:
+
+![App en Odoo](https://github.com/RubenDanielCastelao/SXE-Odoo_Modulo/blob/master/images/odoo-addon.png)
+
+> [!AVISO]
+> Para poder añadir el addon, se debera activar el modo desarrollador en Odoo. Para ello, se deberá ir a `Ajustes` -> `Activar el modo desarrollador` y luego ir a `Aplicaciones` -> `Actualizar lista de aplicaciones` y buscar el modulo `openacademy` y instalarlo.
