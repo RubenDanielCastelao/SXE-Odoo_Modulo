@@ -81,3 +81,30 @@ Y asi se vería en Odoo:
 
 > [!AVISO]
 > Para poder añadir el addon, se debera activar el modo desarrollador en Odoo. Para ello, se deberá ir a `Ajustes` -> `Activar el modo desarrollador` y luego ir a `Aplicaciones` -> `Actualizar lista de aplicaciones` y buscar el modulo `openacademy` y instalarlo.
+
+Luego para crear una tabla modificaremos models/models.py:
+
+```python
+
+from odoo import fields, models
+
+class materiales(models.Model):
+    _name = 'materiales'
+    _description = 'tabla de materiales y sus datos'
+
+    name = fields.Char(String = 'Nombre')
+    description = fields.Char(String = 'Descripcion')
+    precio = fields.Float(String = 'Precio')
+
+```
+
+Reiniciaremos el docker, y luego haremos un Upgrade en Odoo, para que se cree la tabla en la base de datos.
+
+Asi se vería en la BD:
+
+![App en Odoo](https://github.com/RubenDanielCastelao/SXE-Odoo_Modulo/blob/master/images/db.png)
+
+
+Luego, para que se muestre en la interfaz de Odoo, modificaremos views/views.xml:
+
+```xml
