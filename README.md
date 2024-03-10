@@ -1,5 +1,5 @@
 
-```markdown
+
 # Creación de Odoo
 
 Para crear el contenedor de Odoo, hemos utilizado la imagen `odoo:16.0` de Docker. El comando utilizado para crear el contenedor es el siguiente:
@@ -7,7 +7,7 @@ Para crear el contenedor de Odoo, hemos utilizado la imagen `odoo:16.0` de Docke
 ```bash
 docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo --name db postgres:13
 docker run -p 8069:8069 --name odoo --link db:db -t odoo
-```
+
 
 # Añadir el nuevo addon de openacademy
 
