@@ -110,10 +110,11 @@ Añadiremos data y un xml para que se muestre en la interfaz de Odoo:
 <odoo>
     <data>
 
-        <record model="usuarios" id="openacademy.usuarios">
+        <record model="materiales" id="openacademy.materiales">
 
-            <field name="name">Jay</field>
-            <field name="description">Senior Full Stack Developer</field>
+            <field name="name">Ruben</field>
+            <field name="description">No es un material</field>
+            <field name="precio">999</field>
 
         </record>
 
